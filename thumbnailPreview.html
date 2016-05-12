@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rollover Test</title>
+	<script type="text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
+	<style type="text/css">
+		#thumb{
+			width: 240px;
+			height: 135px;
+			background: url("scrub.jpg") no-repeat;
+			background-position: 0 0;
+		}
+	</style>
+</head>
+<body>
+	<div id = "thumb">
+	</div>
+	<script>
+		$("#thumb").on("mousemove", function( event ) 
+		{
+			var myElement = document.getElementById("thumb");
+			var mousePosition = event.pageX - $('#thumb').offset().left;
+			var totalWidth = myElement.offsetWidth;
+			var numOfPics = 48;
+			var heightOfPics = -135;
+			var pixelOffset = totalWidth/numOfPics;
+			console.log("Position: " + mousePosition);
+			if(mousePosition%pixelOffset === 0){
+				var offset = heightOfPics*(mousePosition/pixelOffset);
+				myElement.style.backgroundPosition = '0 ' + offset + 'px';
+			}
+			else if(mousePosition === 1){
+				var offset = heightOfPics;
+				myElement.style.backgroundPosition = '0 ' + offset + 'px';
+			}
+		}
+		);
+		$("#thumb").on("mouseleave", function(){
+			$("#thumb").css({backgroundPosition: "0 0"});
+		} );
+	</script>
+</body>
+</html>
